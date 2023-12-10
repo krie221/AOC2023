@@ -17,7 +17,6 @@ int main(){
             lastNum = 0;
             power = maxRed * maxGreen * maxBlue;
             sum += power;
-            //cout << sum << endl;
             maxRed = 0;
             maxGreen = 0;
             maxBlue = 0;
@@ -27,7 +26,6 @@ int main(){
             continue;
         }
         else if(line.substr(0, 3) == "red"){
-            //cout << "lastNum: " << lastNum << endl;
             if(lastNum > maxRed){
                 maxRed = lastNum;
             } 
@@ -37,7 +35,6 @@ int main(){
             if(lastNum > maxGreen){
                 maxGreen = lastNum;
             } 
-            //cout << "greenCount: " << greenCount << endl;
         }
         else if(line.substr(0, 4) == "blue"){
             if(lastNum > maxBlue){
