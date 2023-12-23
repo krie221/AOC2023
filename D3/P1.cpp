@@ -14,8 +14,6 @@ const tuple<int, int> neighbors[8]= {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}
 bool isNumber(char x){
     return (x <= '9' && x >= '0');
 }
-//536743, 542339
-//537259
 
 int P1(const vector<string> &engine){
     int sum = 0;
@@ -27,24 +25,22 @@ int P1(const vector<string> &engine){
                 if(numStart == -1){
                     numStart = col;
                 }
-                for(auto neigh : neighbors){
-                    int y = row + get<0>(neigh);
-                    int x = col + get<1>(neigh);
+                if(!found){
+                    for(auto neigh : neighbors){
+                        int y = row + get<0>(neigh);
+                        int x = col + get<1>(neigh);
 
-                    if(x < 0 || x > engine[row].size() - 1 || y < 0 || y > engine.size() - 1){
-                        continue;
-                    }
-                    if(!isdigit(engine[y][x]) && engine[y][x] != '.'){
-                        //cout << "(" << y << ", " << x << ")" << " - " << engine[y][x] << endl;
-                        found = true;
-                        break;
+                        if(x < 0 || x > engine[row].size() - 1 || y < 0 || y > engine.size() - 1){
+                            continue;
+                        }
+                        if(!isdigit(engine[y][x]) && engine[y][x] != '.'){
+                            found = true;
+                            break;
+                        }
                     }
                 }
             }
             else if(found && numStart != -1){
-                //cout << "row: " << row << ", " << "col: " << col << endl;
-                //cout << numStart << " | " << col << endl;
-                cout << engine[row].substr(numStart, col - numStart) << endl;
                 sum += stoi(engine[row].substr(numStart, col - numStart));
                 numStart = -1;
                 found = false;
@@ -52,6 +48,9 @@ int P1(const vector<string> &engine){
             else{
                 numStart = -1;
             }
+        }
+        if(numStart != -1 && found){
+            sum += stoi(engine[row].substr(numStart));
         }
     }
     return sum;
@@ -65,7 +64,6 @@ int main(){
     while(input >> line){
         engine.emplace_back(line);
     }
-    //cout << (!isdigit(engine[1][65] && engine[1][65] != '.')) << endl;
     cout << "P1: " << P1(engine);
     return 0;
 }
