@@ -29,7 +29,6 @@ int main(){
             if(lastNum > maxRed){
                 maxRed = lastNum;
             } 
-            cout << "redCount: " << maxRed << endl;
         }
         else if(line.substr(0, 5) == "green"){
             if(lastNum > maxGreen){
